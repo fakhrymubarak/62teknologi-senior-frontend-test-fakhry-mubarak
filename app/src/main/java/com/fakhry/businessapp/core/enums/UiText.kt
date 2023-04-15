@@ -10,9 +10,8 @@ sealed class UiText {
     data class StringResourceWithInt(@StringRes val id: Int, val params: Int) : UiText()
 
     companion object {
-        fun unknownError(): UiText {
-            return StringResource(R.string.text_error_unknown)
-        }
+        val unknownError = StringResource(R.string.text_error_unknown)
+        val networkError = StringResource(R.string.text_error_network_not_avail)
     }
 }
 
@@ -22,3 +21,4 @@ fun UiText.asString(context: Context) =
         is UiText.StringResource -> context.getString(this.id)
         is UiText.StringResourceWithInt -> context.getString(this.id, params)
     }
+

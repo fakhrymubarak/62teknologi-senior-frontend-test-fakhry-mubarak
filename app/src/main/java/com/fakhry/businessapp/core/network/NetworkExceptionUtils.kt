@@ -11,7 +11,7 @@ import javax.net.ssl.SSLHandshakeException
 
 fun getMessageFromException(e: Exception): NetworkExceptionResult {
     val exceptionResult = NetworkExceptionResult()
-    var uiText = UiText.unknownError()
+    var uiText : UiText = UiText.unknownError
     var errorResponse: ErrorResponse? = null
 
     when (e) {
@@ -25,7 +25,7 @@ fun getMessageFromException(e: Exception): NetworkExceptionResult {
                 404 -> UiText.StringResource(R.string.text_error_network_not_found)
                 429 -> UiText.StringResource(R.string.text_error_too_many_request)
                 in 410..499 -> UiText.StringResource(R.string.text_error_network_apps)
-                else -> UiText.unknownError()
+                else -> UiText.unknownError
             }
             uiText = httpErrorText
 

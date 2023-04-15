@@ -1,29 +1,8 @@
 <resources>
     <string name="app_name">Business App</string>
 
-    <!-- Login Page -->
-    <string name="text_error_empty_field">Please fill this field</string>
-
-    <!-- Register Page -->
-
-    <!-- Dashboard Page -->
-
-    <!-- Profile Page -->
 
     <!-- Splash Screen - Update Dialog -->
-    <string name="text_connection_not_found">Network Not Found</string>
-    <string name="text_retry">Retry</string>
-    <string name="text_cancel">Cancel</string>
-    <string name="text_force_update_title">New version is available</string>
-    <string name="text_force_update_desc">Please, update app to new version to continue.</string>
-    <string name="text_force_update_desc_soft">Please, update app to get a better experience.</string>
-    <string name="text_update">Update</string>
-    <string name="text_no_thanks">No, thanks</string>
-
-    <!-- Toast Title -->
-    <string name="text_toast_success">Success</string>
-    <string name="text_toast_warning">Notification</string>
-    <string name="text_toast_error">Something wrong</string>
 
     <!-- Content Description -->
     <string name="cd_btn_back">Button Back</string>
