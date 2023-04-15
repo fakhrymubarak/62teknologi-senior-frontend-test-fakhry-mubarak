@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- REVAMP APPS DIMENS -->
+    <!-- Font Sizes -->
+    <dimen name="font_larger">16sp</dimen>
+    <dimen name="font_large">14sp</dimen>
+    <dimen name="font_regular">12sp</dimen>
+    <dimen name="font_small">10sp</dimen>
+
+    <!-- Radius -->
+    <dimen name="radius_smaller">4dp</dimen>
+    <dimen name="radius_small">6dp</dimen>
+    <dimen name="radius_regular">8dp</dimen>
+    <dimen name="radius_medium">10dp</dimen>
+
+    <!-- Spacing Between Two Views -->
+    <dimen name="spacing_huger">56dp</dimen>
+    <dimen name="spacing_huge">40dp</dimen>
+    <dimen name="spacing_larger">24dp</dimen>
+    <dimen name="spacing_large">20dp</dimen>
+    <dimen name="spacing_regular">16dp</dimen>
+    <dimen name="spacing_normal_quarter">12dp</dimen>
+    <dimen name="spacing_small">10dp</dimen>
+    <dimen name="spacing_smaller">8dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_weeny">2dp</dimen>
+</resources>

@@ -1,0 +1,197 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary50</item>
+        <item name="colorPrimaryVariant">@color/color_primary60</item>
+        <item name="colorOnPrimary">@color/color_white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/color_green50</item>
+        <item name="colorSecondaryVariant">@color/color_green80</item>
+        <item name="colorOnSecondary">@color/color_black</item>
+
+        <!-- Customize your theme here. -->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+        <!--  Hide ActionBar -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <!--Splash Screen-->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@color/color_white</item>
+
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+             animated drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <!-- Required for animated icons -->
+        <item name="windowSplashScreenAnimationDuration">200</item>
+
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/BaseTheme</item>
+    </style>
+
+    <!-- SPLASH ACTIVITY -->
+    <style name="AppTheme" parent="BaseTheme" />
+
+    <style name="AppTheme.AppBar">
+        <item name="colorPrimary">@color/color_white</item>
+    </style>
+
+    <style name="AppTheme.BackgroundSplash" parent="AppTheme">
+        <item name="android:windowBackground">@color/color_primary_apps</item>
+        <item name="colorPrimaryDark">@color/color_primary_apps</item>
+        <item name="colorPrimaryVariant">@color/color_primary_apps</item>
+    </style>
+
+
+    <!--TEXT INPUT-->
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/Text.Regular.16sp</item>
+        <item name="errorTextAppearance">@style/Text.Regular.16sp.Red</item>
+        <item name="boxStrokeErrorColor">@color/color_red50</item>
+        <item name="errorTextColor">@color/color_red50</item>
+        <item name="hintEnabled">true</item>
+    </style>
+
+    <style name="TextInputLayout.Regular">
+        <item name="boxStrokeColor">@color/color_selector_text_input_box_stroke</item>
+    </style>
+
+    <style name="TextInputEdit">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
+    <style name="TextInputEdit.Regular">
+        <item name="android:textAppearance">@style/Text.Regular.16sp</item>
+    </style>
+
+    <!-- TEXT STYLES -->
+    <style name="Text" parent="android:TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <!-- Poppins 400 -->
+    <style name="Text.Regular">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="Text.Regular.14sp">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="Text.Regular.16sp">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Text.Regular.16sp.Red">
+        <item name="android:color">@color/color_red50</item>
+    </style>
+
+    <!-- Poppins 500 -->
+    <style name="Text.Medium">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="Text.Medium.10sp">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!-- Poppins 600 -->
+    <style name="Text.SemiBold">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="Text.SemiBold.14sp">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Text.SemiBold.16sp">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- BUTTON STYLES -->
+    <style name="Button" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textAppearance">@style/Text.SemiBold.14sp</item>
+    </style>
+
+    <style name="Button.Primary">
+        <item name="android:background">@drawable/selector_btn_primary</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="Button.Primary.Outlined">
+        <item name="android:textAppearance">@style/Text.SemiBold</item>
+        <item name="android:background">@drawable/selector_btn_outline_primary</item>
+        <item name="android:textColor">@color/color_selector_text_button_outlined</item>
+    </style>
+
+    <style name="Button.Small">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingTop">@dimen/spacing_smaller</item>
+        <item name="android:paddingBottom">@dimen/spacing_smaller</item>
+        <item name="android:paddingStart">@dimen/spacing_regular</item>
+        <item name="android:paddingEnd">@dimen/spacing_regular</item>
+    </style>
+
+    <style name="Button.Small.Primary">
+        <item name="android:background">@drawable/selector_btn_primary</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textAppearance">@style/Text.SemiBold</item>
+    </style>
+
+    <!-- BOTTOM SHEET DIALOG -->
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_rounded_dialog</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+    <!-- OTHER MATERIAL COMPONENTS-->
+    <style name="ShapeRounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_smaller</item>
+    </style>
+
+    <style name="ShapeCircle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+    <!-- STYLE TAB LAYOUT -->
+    <style name="TabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/font_regular</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+        <item name="tabIndicatorColor">@color/color_primary50</item>
+        <item name="tabSelectedTextColor">@color/color_primary50</item>
+        <item name="tabIndicatorHeight">3.5dp</item>
+    </style>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary-->
+    <color name="color_primary_apps">#B3B3B3</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_black">#090A0A</color>
+
+    <color name="color_gray1">#F1F2F6</color>
+    <color name="color_gray2">#C4C4C4</color>
+    <color name="color_gray3">#A5A5A5</color>
+    <color name="color_gray4">#525A64</color>
+
+    <color name="color_transparent">#00000000</color>
+    <color name="color_white_transparent40">#66FAFAFA</color>
+    <color name="color_black_transparent17">#2B121212</color>
+
+    <color name="color_primary50">#969696</color>
+    <color name="color_primary60">#7D7D7D</color>
+
+    <color name="color_green80">#24754E</color>
+    <color name="color_green50">#34A770</color>
+    <color name="color_green20">#F3FBF8</color>
+
+    <color name="color_yellow80">#997700</color>
+    <color name="color_yellow50">#EBB700</color>
+    <color name="color_yellow20">#FFFCF0</color>
+
+    <color name="color_red80">#941605</color>
+    <color name="color_red50">#F85640</color>
+    <color name="color_red20">#FEF2F0</color>
+</resources>
