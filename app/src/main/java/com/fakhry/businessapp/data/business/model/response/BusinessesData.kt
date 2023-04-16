@@ -33,7 +33,7 @@ data class BusinessesData(
     val phone: String,
 
     @field:SerializedName("price")
-    val price: String,
+    val price: String?,
 
     @field:SerializedName("name")
     val name: String,
@@ -64,7 +64,7 @@ fun BusinessesData.toDomain() = Business(
     url = url,
     displayPhone = displayPhone,
     phone = phone,
-    price = price,
+    price = price ?: "-",
     alias = alias,
     fullAddress = location.toFullAddress(),
     categories = categories,

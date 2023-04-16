@@ -1,0 +1,48 @@
+package com.fakhry.businessapp.data.business.remote
+
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.fakhry.businessapp.core.enums.API_SEARCH_LIMIT
+import com.fakhry.businessapp.data.business.model.request.BusinessQueryParam
+import com.fakhry.businessapp.data.business.model.request.asMap
+import com.fakhry.businessapp.data.business.model.response.BusinessesData
+import retrofit2.HttpException
+import timber.log.Timber
+import java.io.IOException
+
+class BusinessPagingSource(
+    private val apiService: BusinessApiService,
+    private val queryParam: BusinessQueryParam,
+) : PagingSource<Int, BusinessesData>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BusinessesData> {
+        return try {
+            val nextOffset = params.key ?: 0
+            val result = apiService.getBusiness(queryParam.asMap(), offset = nextOffset)
+
+            val data = result.businesses
+
+            if (data.isEmpty() || result.total == 0) {
+                return LoadResult.Page(listOf(), null, null)
+            }
+
+            LoadResult.Page(
+                data = data,
+                prevKey = null, // Only paging forward.
+                nextKey = if (nextOffset > result.total) null else nextOffset + API_SEARCH_LIMIT
+            )
+        } catch (e: IOException) {
+            Timber.e(e)
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            Timber.e(e)
+            LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, BusinessesData>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
+    }
+}
