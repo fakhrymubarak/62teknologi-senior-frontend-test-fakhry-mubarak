@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 data class BusinessQueryParam(
     @SerializedName("term")
-    var query: String = "",
+    var terms: String = "",
 
     @SerializedName("location")
     val location: String = API_DEFAULT_LOCATION,
@@ -16,7 +16,7 @@ data class BusinessQueryParam(
 )
 
 fun BusinessQueryParam.asMap() = mapOf<String, String>(
-    "term" to this.query,
+    "term" to this.terms,
     "location" to this.location,
     "sort_by" to this.filter,
 )

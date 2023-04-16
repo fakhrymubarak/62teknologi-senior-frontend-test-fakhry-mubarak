@@ -1,14 +1,6 @@
 <resources>
     <string name="app_name">Business App</string>
 
-
-    <!-- Splash Screen - Update Dialog -->
-
-    <!-- Content Description -->
-    <string name="cd_btn_back">Button Back</string>
-    <string name="cd_icon">Icon</string>
-    <string name="cd_image">Image</string>
-
     <!-- Network Errors -->
     <string name="text_error_unknown">Unknown error</string>
     <string name="text_error_default_server">Oops, can\'t connect to server. Please check your connection to internet or contact our office.</string>
@@ -19,6 +11,10 @@
     <string name="text_error_network_failure">Oops, network failure. Please check your internet connection.</string>
     <string name="text_error_conn_time_out">Oops, connection timed out. Please check your connection to internet</string>
     <string name="text_error_network_not_avail">Oops, you seem to be offline. Please check your connection to internet.</string>
+
+
+    <!-- Dashboard Page-->
+    <string name="text_search">Search Business</string>
 
 
 </resources>

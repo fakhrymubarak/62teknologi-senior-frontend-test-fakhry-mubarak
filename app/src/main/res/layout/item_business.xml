@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_regular"
+    android:layout_marginTop="@dimen/spacing_small"
+    app:cardCornerRadius="@dimen/spacing_smaller">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_smaller">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_business"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layerType="software"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeRounded"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_name"
+            style="@style/Text.SemiBold.14sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_smaller"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_business"
+            app:layout_constraintTop_toTopOf="@id/iv_business"
+            tools:text="Business Examples Business Examples Business Examples Business Examples " />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_rating"
+            style="@style/Text.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:drawableStart="@drawable/ic_star_20"
+            android:textColor="@color/color_gray2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_business"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_name"
+            tools:text="4.8 (4.125)" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_contact"
+            style="@style/Text.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:drawableStart="@drawable/ic_phone_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_business"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_rating"
+            tools:text="(021) 123123" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_address"
+            style="@style/Text.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_business"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_contact"
+            tools:text="Jalan yang jauh jangan lupa pulang." />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

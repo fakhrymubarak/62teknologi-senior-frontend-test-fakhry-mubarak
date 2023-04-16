@@ -56,7 +56,7 @@ fun getMessageFromException(e: Exception): NetworkExceptionResult {
         is IOException -> uiText =
             UiText.StringResource(R.string.text_error_network_failure)
     }
-    exceptionResult.errorMessages = uiText
+    exceptionResult.errorMessage = uiText
     exceptionResult.errorResponse = errorResponse
 
     Timber.w(e)
@@ -66,7 +66,7 @@ fun getMessageFromException(e: Exception): NetworkExceptionResult {
 
 
 data class NetworkExceptionResult(
-    var errorMessages: UiText = UiText.StringResource(R.string.text_error_default_server),
+    var errorMessage: UiText = UiText.StringResource(R.string.text_error_default_server),
     var errorResponse: ErrorResponse? = null
 )
 
