@@ -3,7 +3,10 @@ package com.fakhry.businessapp.data.business.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.fakhry.businessapp.core.enums.API_SEARCH_LIMIT
+import com.fakhry.businessapp.core.enums.DataResource
+import com.fakhry.businessapp.core.enums.UiText
 import com.fakhry.businessapp.core.network.NetworkState
+import com.fakhry.businessapp.core.network.getMessageFromException
 import com.fakhry.businessapp.data.business.model.request.BusinessQueryParam
 import com.fakhry.businessapp.data.business.model.response.BusinessesData
 import com.fakhry.businessapp.data.business.remote.BusinessApiService
@@ -36,5 +39,17 @@ class BusinessRepositoryImpl @Inject constructor(
                 )
             }
         )
+    }
+
+    override suspend fun getBusinessDetails(id: String): DataResource<BusinessesData> {
+        if (!networkState.isNetworkAvailable()) return DataResource.Error(UiText.networkError)
+
+        return try {
+            val result = apiService.getBusinessDetails(id)
+            DataResource.Success(result)
+        } catch (e: Exception) {
+            val networkException = getMessageFromException(e)
+            DataResource.Error(networkException.errorMessage)
+        }
     }
 }

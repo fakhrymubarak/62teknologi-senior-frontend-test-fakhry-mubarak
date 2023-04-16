@@ -1,6 +1,7 @@
 package com.fakhry.businessapp.data.business.model.response
 
 import com.fakhry.businessapp.domain.business.model.Business
+import com.fakhry.businessapp.domain.business.model.BusinessDetails
 import com.google.gson.annotations.SerializedName
 
 data class BusinessesData(
@@ -16,6 +17,9 @@ data class BusinessesData(
 
     @field:SerializedName("coordinates")
     val coordinates: GeoPointData,
+
+    @field:SerializedName("photos")
+    val photos: List<String>?,
 
     @field:SerializedName("review_count")
     val reviewCount: Int,
@@ -51,7 +55,10 @@ data class BusinessesData(
     val categories: List<CategoriesData>,
 
     @field:SerializedName("is_closed")
-    val isClosed: Boolean
+    val isClosed: Boolean,
+
+    @field:SerializedName("hours")
+    val hoursData: List<HoursItem>?,
 )
 
 fun BusinessesData.toDomain() = Business(
@@ -60,13 +67,21 @@ fun BusinessesData.toDomain() = Business(
     imageUrl = imageUrl,
     rating = rating,
     reviewCount = reviewCount,
-    coordinates = coordinates.toDomain(),
-    url = url,
     displayPhone = displayPhone,
-    phone = phone,
-    price = price ?: "-",
-    alias = alias,
     fullAddress = location.toFullAddress(),
-    categories = categories,
-    isClosed = isClosed,
+)
+
+fun BusinessesData.toDomainDetails() = BusinessDetails(
+    business = Business(
+        id = id,
+        name = name,
+        imageUrl = imageUrl,
+        rating = rating,
+        reviewCount = reviewCount,
+        displayPhone = displayPhone,
+        fullAddress = location.toFullAddress(),
+    ),
+    isOpenNow = hoursData?.firstOrNull()?.isOpenNow ?: false,
+    photoUrls = photos ?: listOf(imageUrl),
+    categories = categories.map { it.title }
 )

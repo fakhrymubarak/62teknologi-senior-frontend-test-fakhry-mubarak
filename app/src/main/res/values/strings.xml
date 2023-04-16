@@ -16,5 +16,8 @@
     <!-- Dashboard Page-->
     <string name="text_search">Search Business</string>
 
-
+    <!-- Details Page-->
+    <string name="text_open_now">Open Now</string>
+    <string name="text_closed">Closed</string>
+    <string name="text_business_categories">Business Categories</string>
 </resources>

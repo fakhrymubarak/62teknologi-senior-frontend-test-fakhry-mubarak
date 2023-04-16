@@ -42,7 +42,7 @@ class BusinessPagingAdapter : PagingDataAdapter<Business, BusinessPagingAdapter.
                 ivBusiness.loadWithShimmer(data.imageUrl)
                 tvBusinessName.text = data.name
                 tvBusinessRating.text = data.ratingWithReviewCount()
-                tvBusinessContact.text = data.phone
+                tvBusinessContact.text = data.displayPhone
                 tvBusinessAddress.text = data.fullAddress
             }
         }

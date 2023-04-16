@@ -16,10 +16,13 @@
         android:theme="@style/BaseTheme"
         tools:targetApi="31">
         <activity
-            android:name="com.fakhry.businessapp.presentation.dashboard.DashboardActivity"
+            android:name=".presentation.business_details.BusinessDetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.fakhry.businessapp.presentation.MainActivity"
+            android:name=".presentation.dashboard.DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
             <intent-filter>

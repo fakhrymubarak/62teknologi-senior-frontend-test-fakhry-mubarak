@@ -3,6 +3,7 @@ package com.fakhry.businessapp.presentation.dashboard
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.fakhry.businessapp.domain.business.model.Business
 import com.fakhry.businessapp.domain.business.usecases.GetBusinessListUseCase
 import com.fakhry.businessapp.presentation.dashboard.model.FilterBusiness
@@ -48,7 +49,10 @@ class DashboardViewModel @Inject constructor(
     fun getListBusiness() {
         viewModelScope.launch(Dispatchers.IO) {
             _queryBusiness.flatMapLatest {
-                getBusinessList(query = it, filters = _filtersBusiness.value.toListString())
+                getBusinessList(
+                    query = it,
+                    filters = _filtersBusiness.value.toListString(),
+                ).cachedIn(this)
             }.collectLatest { pagingData ->
                 _listBusiness.emit(pagingData)
             }
@@ -56,7 +60,10 @@ class DashboardViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
             _filtersBusiness.flatMapLatest {
-                getBusinessList(query = _queryBusiness.value, filters = it.toListString())
+                getBusinessList(
+                    query = _queryBusiness.value,
+                    filters = it.toListString(),
+                ).cachedIn(this)
             }.collectLatest { pagingData ->
                 _listBusiness.emit(pagingData)
             }

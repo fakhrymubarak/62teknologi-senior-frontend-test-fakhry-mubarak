@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.business_details.BusinessDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_photo_slider"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintDimensionRatio="H, 5:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_slider"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/vp_photo_slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vp_photo_slider">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_gray2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/spacing_regular"
+            android:background="null"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="@id/vp_photo_slider"
+            app:layout_constraintTop_toTopOf="@id/vp_photo_slider" />
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_normal_quarter"
+            app:dotsColor="@color/color_gray2"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="8dp"
+            app:dotsSpacing="@dimen/spacing_tiny"
+            app:dotsWidthFactor="2.5"
+            app:layout_constraintBottom_toBottomOf="@+id/vp_photo_slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:selectedDotColor="@color/color_primary_apps"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_name"
+            style="@style/Text.SemiBold.14sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_regular"
+            android:layout_marginTop="@dimen/spacing_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vp_photo_slider"
+            tools:text="Business Examples Business Examples Business Examples Business Examples " />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_is_open"
+            style="@style/Text.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:background="@drawable/bg_btn_outline_gray3"
+            android:drawableStart="@drawable/ic_open_now_24"
+            android:drawablePadding="@dimen/spacing_tiny"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/spacing_smaller"
+            android:paddingVertical="@dimen/spacing_tiny"
+            android:text="@string/text_closed"
+            android:textColor="@color/color_gray3"
+            app:layout_constraintStart_toStartOf="@id/tv_business_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_rating"
+            style="@style/Text.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:drawableStart="@drawable/ic_star_20"
+            android:textColor="@color/color_gray2"
+            app:layout_constraintEnd_toEndOf="@id/tv_business_name"
+            app:layout_constraintStart_toStartOf="@id/tv_business_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_is_open"
+            tools:text="4.8 (4.125)" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_contact"
+            style="@style/Text.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:drawableStart="@drawable/ic_phone_20"
+            app:layout_constraintEnd_toEndOf="@id/tv_business_name"
+            app:layout_constraintStart_toStartOf="@id/tv_business_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_rating"
+            tools:text="(021) 123123" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_business_address"
+            style="@style/Text.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="@id/tv_business_name"
+            app:layout_constraintStart_toStartOf="@id/tv_business_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_contact"
+            tools:text="Jalan yang jauh jangan lupa pulang." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_category"
+            style="@style/Text.SemiBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_regular"
+            android:layout_marginTop="@dimen/spacing_regular"
+            android:text="@string/text_business_categories"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_address" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal_quarter"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_category"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_category"
+            tools:spanCount="2" />
+
+        <!-- list review -->
+
+        <!-- button see on gmaps -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,8 +1,10 @@
 package com.fakhry.businessapp.data.business.remote
 
 import com.fakhry.businessapp.core.enums.API_SEARCH_LIMIT
+import com.fakhry.businessapp.data.business.model.response.BusinessesData
 import com.fakhry.businessapp.data.business.model.response.BusinessesResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
@@ -22,4 +24,9 @@ interface BusinessApiService {
         @Query("offset") offset: Int = 0,
         @Query("attributes") filters: List<String> = listOf(""),
     ): BusinessesResponse
+
+    @GET("v3/businesses/{id}")
+    suspend fun getBusinessDetails(
+        @Path("id") id: String,
+    ): BusinessesData
 }

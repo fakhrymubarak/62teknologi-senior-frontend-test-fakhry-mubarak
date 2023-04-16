@@ -1,5 +1,6 @@
 package com.fakhry.businessapp.presentation.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import com.fakhry.businessapp.core.enums.EXTRA_BUSINESS_ID
 import com.fakhry.businessapp.core.enums.asString
 import com.fakhry.businessapp.core.network.getMessageFromException
 import com.fakhry.businessapp.core.utils.components.collectLifecycleFlow
@@ -23,10 +25,10 @@ import com.fakhry.businessapp.domain.business.model.Business
 import com.fakhry.businessapp.presentation.adapters.BusinessPagingAdapter
 import com.fakhry.businessapp.presentation.adapters.FilterAdapter
 import com.fakhry.businessapp.presentation.adapters.ItemLoadStateAdapter
+import com.fakhry.businessapp.presentation.business_details.BusinessDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
@@ -54,7 +56,9 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun initListener() {
         businessAdapter.onDetailClick = { id ->
-            Timber.i("click $id")
+            val intent = Intent(this, BusinessDetailsActivity::class.java)
+            intent.putExtra(EXTRA_BUSINESS_ID, id)
+            startActivity(intent)
         }
 
         filteradapter.onClick = {
