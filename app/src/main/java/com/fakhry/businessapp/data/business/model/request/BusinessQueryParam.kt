@@ -12,11 +12,11 @@ data class BusinessQueryParam(
     val location: String = API_DEFAULT_LOCATION,
 
     @SerializedName("sort_by")
-    var filter: String = SortBy.BEST_MATCH.value,
+    var sorter: String = SortBy.BEST_MATCH.value,
 )
 
 fun BusinessQueryParam.asMap() = mapOf<String, String>(
     "term" to this.terms,
     "location" to this.location,
-    "sort_by" to this.filter,
+    "sort_by" to this.sorter,
 )

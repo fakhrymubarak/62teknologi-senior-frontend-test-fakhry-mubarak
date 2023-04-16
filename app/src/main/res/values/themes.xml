@@ -87,6 +87,7 @@
     <style name="Text" parent="android:TextAppearance">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/color_black</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <!-- Poppins 400 -->

@@ -20,5 +20,6 @@ interface BusinessApiService {
         @QueryMap queryParam: Map<String, String>,
         @Query("limit") limit: Int = API_SEARCH_LIMIT,
         @Query("offset") offset: Int = 0,
+        @Query("attributes") filters: List<String> = listOf(""),
     ): BusinessesResponse
 }

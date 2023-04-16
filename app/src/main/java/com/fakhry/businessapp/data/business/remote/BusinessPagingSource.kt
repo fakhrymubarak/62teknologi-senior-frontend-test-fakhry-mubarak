@@ -1,8 +1,11 @@
 package com.fakhry.businessapp.data.business.remote
 
+import android.accounts.NetworkErrorException
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.fakhry.businessapp.core.enums.API_SEARCH_LIMIT
+import com.fakhry.businessapp.core.enums.NetworkException
+import com.fakhry.businessapp.core.network.NetworkState
 import com.fakhry.businessapp.data.business.model.request.BusinessQueryParam
 import com.fakhry.businessapp.data.business.model.request.asMap
 import com.fakhry.businessapp.data.business.model.response.BusinessesData
@@ -11,13 +14,17 @@ import timber.log.Timber
 import java.io.IOException
 
 class BusinessPagingSource(
+    private val networkState: NetworkState,
     private val apiService: BusinessApiService,
     private val queryParam: BusinessQueryParam,
+    private val filters: List<String>,
 ) : PagingSource<Int, BusinessesData>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BusinessesData> {
         return try {
+            if (!networkState.isNetworkAvailable()) throw NetworkException()
+
             val nextOffset = params.key ?: 0
-            val result = apiService.getBusiness(queryParam.asMap(), offset = nextOffset)
+            val result = apiService.getBusiness(queryParam.asMap(), offset = nextOffset, filters = filters)
 
             val data = result.businesses
 
@@ -34,6 +41,9 @@ class BusinessPagingSource(
             Timber.e(e)
             LoadResult.Error(e)
         } catch (e: HttpException) {
+            Timber.e(e)
+            LoadResult.Error(e)
+        } catch (e: NetworkException){
             Timber.e(e)
             LoadResult.Error(e)
         }

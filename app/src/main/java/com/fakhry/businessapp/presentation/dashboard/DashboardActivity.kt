@@ -21,6 +21,7 @@ import com.fakhry.businessapp.core.utils.isVisible
 import com.fakhry.businessapp.databinding.ActivityDashboardBinding
 import com.fakhry.businessapp.domain.business.model.Business
 import com.fakhry.businessapp.presentation.adapters.BusinessPagingAdapter
+import com.fakhry.businessapp.presentation.adapters.FilterAdapter
 import com.fakhry.businessapp.presentation.adapters.ItemLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -32,7 +33,9 @@ class DashboardActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityDashboardBinding::inflate)
     private val viewModel by viewModels<DashboardViewModel>()
 
-    private lateinit var adapter: BusinessPagingAdapter
+    private lateinit var businessAdapter: BusinessPagingAdapter
+    private lateinit var filteradapter: FilterAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -43,13 +46,19 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        adapter = BusinessPagingAdapter()
-        binding.rvBusiness.adapter = adapter.withLoadStateFooter(ItemLoadStateAdapter())
+        businessAdapter = BusinessPagingAdapter()
+        filteradapter = FilterAdapter()
+        binding.rvBusiness.adapter = businessAdapter.withLoadStateFooter(ItemLoadStateAdapter())
+        binding.rvFilter.adapter = filteradapter
     }
 
     private fun initListener() {
-        adapter.onDetailClick = { id ->
+        businessAdapter.onDetailClick = { id ->
             Timber.i("click $id")
+        }
+
+        filteradapter.onClick = {
+            viewModel.apply { if (it.isActive) removeFilterBusiness(it) else addFilterBusiness(it) }
         }
 
         binding.etSearchCatalog.doOnTextChanged { text, _, _, _ ->
@@ -78,20 +87,21 @@ class DashboardActivity : AppCompatActivity() {
                 }
             }
         }
-        collectLifecycleFlow(adapter.loadStateFlow) { loadStates ->
+
+        collectLifecycleFlow(businessAdapter.loadStateFlow) { loadStates ->
             val state = loadStates.refresh
             populateLoadingBusiness(state is LoadState.Loading)
             if (state is LoadState.Error) {
                 val networkException = getMessageFromException(state.error as Exception)
                 showToast(networkException.errorMessage.asString(this))
-                adapter.retry()
+                businessAdapter.retry()
             }
         }
     }
 
     private suspend fun populateSuccessBusiness(data: PagingData<Business>) {
-        adapter.submitData(PagingData.empty())
-        adapter.submitData(data)
+        businessAdapter.submitData(PagingData.empty())
+        businessAdapter.submitData(data)
     }
 
     private fun populateLoadingBusiness(isLoading: Boolean) {

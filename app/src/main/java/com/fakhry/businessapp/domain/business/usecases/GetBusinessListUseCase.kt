@@ -13,10 +13,10 @@ import javax.inject.Inject
 class GetBusinessListUseCase @Inject constructor(
     private val repository: BusinessRepository
 ) {
-    suspend operator fun invoke(query: String): Flow<PagingData<Business>> {
+    suspend operator fun invoke(query: String, filters: List<String>): Flow<PagingData<Business>> {
         val queryParam = BusinessQueryParam()
         queryParam.terms = query
-        return repository.getBusiness(queryParam).flow.map { pagingData ->
+        return repository.getBusiness(queryParam, filters).flow.map { pagingData ->
             pagingData.map { data -> data.toDomain() }
         }
     }
