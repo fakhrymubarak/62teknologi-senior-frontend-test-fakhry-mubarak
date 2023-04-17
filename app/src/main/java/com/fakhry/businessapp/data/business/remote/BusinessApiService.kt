@@ -3,6 +3,7 @@ package com.fakhry.businessapp.data.business.remote
 import com.fakhry.businessapp.core.enums.API_SEARCH_LIMIT
 import com.fakhry.businessapp.data.business.model.response.BusinessesData
 import com.fakhry.businessapp.data.business.model.response.BusinessesResponse
+import com.fakhry.businessapp.data.business.model.response.review.ReviewResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -29,4 +30,11 @@ interface BusinessApiService {
     suspend fun getBusinessDetails(
         @Path("id") id: String,
     ): BusinessesData
+
+    @GET("v3/businesses/{id}/reviews")
+    suspend fun getBusinessReviews(
+        @Path("id") id: String,
+        @Query("limit") limit: Int = API_SEARCH_LIMIT,
+        @Query("offset") offset: Int = 0,
+    ): ReviewResponse
 }

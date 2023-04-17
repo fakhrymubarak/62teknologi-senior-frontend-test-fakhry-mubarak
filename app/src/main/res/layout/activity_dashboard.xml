@@ -39,6 +39,7 @@
         tools:listitem="@layout/item_filter" />
 
     <FrameLayout
+        android:layout_marginTop="@dimen/spacing_smaller"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

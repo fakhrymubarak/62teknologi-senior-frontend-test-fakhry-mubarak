@@ -14,69 +14,64 @@
         android:layout_margin="@dimen/spacing_smaller">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_business"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+            android:id="@+id/iv_user_avatar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layerType="software"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@style/ShapeRounded"
+            app:shapeAppearance="@style/ShapeCircle"
             tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_business_name"
-            style="@style/Text.SemiBold.14sp"
+            android:id="@+id/tv_user_name"
+            style="@style/Text.SemiBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_smaller"
             android:ellipsize="end"
             android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_avatar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_business"
-            app:layout_constraintTop_toTopOf="@id/iv_business"
-            tools:text="Business Examples Business Examples Business Examples Business Examples " />
+            app:layout_constraintStart_toEndOf="@id/iv_user_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_user_avatar"
+            tools:text="Fakhry Mubarak" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rating_bar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:numStars="5"
+            android:progressTint="@color/color_yellow50"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_avatar"
+            tools:rating="5" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_business_rating"
-            style="@style/Text.Regular"
+            android:id="@+id/tv_review_date"
+            style="@style/Text.Regular.10sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_smaller"
-            android:layout_marginTop="@dimen/spacing_tiny"
-            android:drawableStart="@drawable/ic_star_20"
-            android:textColor="@color/color_gray2"
+            android:textColor="@color/color_gray3"
+            app:layout_constraintBottom_toBottomOf="@id/rating_bar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_business"
-            app:layout_constraintTop_toBottomOf="@id/tv_business_name"
-            tools:text="4.8 (4.125)" />
+            app:layout_constraintStart_toEndOf="@id/rating_bar"
+            app:layout_constraintTop_toTopOf="@id/rating_bar"
+            tools:text="4 months ago" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_business_contact"
+            android:id="@+id/tv_review_text"
             style="@style/Text.Regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_smaller"
             android:layout_marginTop="@dimen/spacing_tiny"
-            android:drawableStart="@drawable/ic_phone_20"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_business"
-            app:layout_constraintTop_toBottomOf="@id/tv_business_rating"
-            tools:text="(021) 123123" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_business_address"
-            style="@style/Text.Regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_smaller"
-            android:layout_marginTop="@dimen/spacing_tiny"
-            android:ellipsize="end"
-            android:maxLines="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_business"
-            app:layout_constraintTop_toBottomOf="@id/tv_business_contact"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating_bar"
             tools:text="Jalan yang jauh jangan lupa pulang." />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

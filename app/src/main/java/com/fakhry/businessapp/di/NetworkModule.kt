@@ -64,7 +64,7 @@ object NetworkModule {
         .build()
 
     @Provides
-    fun provideNetworkState(@ApplicationContext context: Context): NetworkState = NetworkState(context);
+    fun provideNetworkState(@ApplicationContext context: Context): NetworkState = NetworkState(context)
 
     @Provides
     fun provideBusinessApiService(client: OkHttpClient): BusinessApiService =

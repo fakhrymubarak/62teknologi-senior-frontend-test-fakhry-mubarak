@@ -18,10 +18,11 @@ import com.fakhry.businessapp.core.utils.isVisible
 import com.fakhry.businessapp.databinding.ActivityBusinessDetailsBinding
 import com.fakhry.businessapp.domain.business.model.BusinessDetails
 import com.fakhry.businessapp.domain.business.model.ratingWithReviewCount
+import com.fakhry.businessapp.domain.review.model.Review
 import com.fakhry.businessapp.presentation.adapters.CategoryAdapter
 import com.fakhry.businessapp.presentation.adapters.PhotoAdapter
+import com.fakhry.businessapp.presentation.adapters.ReviewAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -31,6 +32,7 @@ class BusinessDetailsActivity : AppCompatActivity() {
 
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var photoAdapter: PhotoAdapter
+    private lateinit var reviewAdapter: ReviewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,9 @@ class BusinessDetailsActivity : AppCompatActivity() {
         binding.vpPhotoSlider.adapter = photoAdapter
         binding.dotsPhoto.attachTo(binding.vpPhotoSlider)
 
+        reviewAdapter = ReviewAdapter()
+        binding.rvReviews.adapter = reviewAdapter
+
     }
 
     private fun initListener() {
@@ -66,23 +71,30 @@ class BusinessDetailsActivity : AppCompatActivity() {
 
     private fun initObserver() {
         val businessId = intent.getStringExtra(EXTRA_BUSINESS_ID) ?: return onBackPressedDispatcher.onBackPressed()
+        viewModel.getBusinessDetails(businessId)
+        viewModel.getReviews(businessId)
+
+        collectLifecycleFlow(viewModel.carouselState) {
+            binding.vpPhotoSlider.currentItem = it
+        }
 
         collectLifecycleFlow(viewModel.businessState) { state ->
             when (state) {
                 is UiState.Error -> showToast(state.uiText.asString(this))
                 is UiState.Loading -> populateLoadingDetails(state.isLoading)
                 is UiState.Success -> populateSuccessDetails(state.data)
-                null -> viewModel.getBusinessDetails(businessId)
             }
         }
-
-        collectLifecycleFlow(viewModel.carouselState) {
-            binding.vpPhotoSlider.currentItem = it
+        collectLifecycleFlow(viewModel.reviewsState) { state ->
+            when (state) {
+                is UiState.Error -> showToast(state.uiText.asString(this))
+                is UiState.Loading -> populateLoadingReviews(state.isLoading)
+                is UiState.Success -> populateSuccessReviews(state.data)
+            }
         }
     }
 
     private fun populateLoadingDetails(isLoading: Boolean) {
-        Timber.e("isLoading $isLoading")
         binding.shimmerSlider.isShimmerStarted(isLoading)
         binding.vpPhotoSlider.isVisible(!isLoading)
         binding.rvCategories.isVisible(!isLoading)
@@ -113,6 +125,15 @@ class BusinessDetailsActivity : AppCompatActivity() {
                 )
             }
         }
+    }
 
+
+    private fun populateLoadingReviews(isLoading: Boolean) {
+        binding.shimmerList.isShimmerStarted(isLoading)
+        binding.rvReviews.isVisible(!isLoading)
+    }
+
+    private fun populateSuccessReviews(data: List<Review>) {
+        reviewAdapter.setData(data)
     }
 }
