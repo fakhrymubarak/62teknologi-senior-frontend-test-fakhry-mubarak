@@ -20,7 +20,7 @@ class BusinessPagingSource(
 ) : PagingSource<Int, BusinessesData>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BusinessesData> {
         return try {
-            if (!networkState.isNetworkAvailable()) throw NetworkException()
+            if (networkState.isNetworkNotAvailable) throw NetworkException()
 
             val nextOffset = params.key ?: 0
             val result =

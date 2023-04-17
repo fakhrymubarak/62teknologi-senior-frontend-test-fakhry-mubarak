@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.fakhry.businessapp.core.utils.network
+package com.fakhry.businessapp.core.network
 
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

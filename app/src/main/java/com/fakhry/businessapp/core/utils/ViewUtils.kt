@@ -2,27 +2,11 @@ package com.fakhry.businessapp.core.utils
 
 import android.view.View
 import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
 import coil.load
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.fakhry.businessapp.R
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-
-fun TextInputEditText.getString() = this.text.toString().trim()
-
-fun AppCompatEditText.getString() = this.text.toString()
-
-fun TextInputLayout.isErrorEnabled(state: Boolean) {
-    this.isErrorEnabled = state
-}
-
-fun AppCompatButton.isEnabled(state: Boolean) {
-    this.isEnabled = state
-}
 
 private fun View.visible() {
     this.visibility = View.VISIBLE

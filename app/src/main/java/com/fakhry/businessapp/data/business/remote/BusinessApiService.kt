@@ -11,9 +11,6 @@ import retrofit2.http.QueryMap
 
 enum class SortBy(val value: String) {
     BEST_MATCH("best_match"),
-    RATING("rating"),
-    REVIEW_COUNT("review_count"),
-    DISTANCE("distance"),
 }
 
 interface BusinessApiService {

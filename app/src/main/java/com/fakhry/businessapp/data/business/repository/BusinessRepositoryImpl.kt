@@ -43,7 +43,7 @@ class BusinessRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getBusinessDetails(id: String): DataResource<BusinessesData> {
-        if (!networkState.isNetworkAvailable()) return DataResource.Error(UiText.networkError)
+        if (networkState.isNetworkNotAvailable) return DataResource.Error(UiText.networkError)
 
         return try {
             val result = apiService.getBusinessDetails(id)
@@ -55,7 +55,7 @@ class BusinessRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getBusinessReviews(id: String): DataResource<List<ReviewData>> {
-        if (!networkState.isNetworkAvailable()) return DataResource.Error(UiText.networkError)
+        if (networkState.isNetworkNotAvailable) return DataResource.Error(UiText.networkError)
 
         return try {
             val result = apiService.getBusinessReviews(id)
