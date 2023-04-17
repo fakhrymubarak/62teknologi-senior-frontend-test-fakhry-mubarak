@@ -26,6 +26,11 @@ class FilterAdapter : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
         notifyItemChanged(newData.id)
     }
 
+    fun unCheckedNearbyFilter() {
+        val data = listData.first()
+        activateData(data)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         ItemFilterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )

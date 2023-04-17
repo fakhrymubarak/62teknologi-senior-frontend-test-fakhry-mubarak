@@ -36,6 +36,7 @@ fun List<FilterBusiness>.toListString(): List<String> {
  *
  * */
 fun getDefaultFilters() = listOf(
+    FilterBusiness(0, "Nearest", "", false),
     FilterBusiness(1, "Hot and New", "hot_and_new", false),
     FilterBusiness(2, "Request Quote", "request_a_quote", false),
     FilterBusiness(3, "Reservation", "reservation", false),

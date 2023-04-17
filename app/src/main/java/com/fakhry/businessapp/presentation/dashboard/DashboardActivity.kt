@@ -1,6 +1,8 @@
 package com.fakhry.businessapp.presentation.dashboard
 
+import android.Manifest
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -12,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import com.fakhry.businessapp.R
 import com.fakhry.businessapp.core.enums.EXTRA_BUSINESS_ID
 import com.fakhry.businessapp.core.enums.asString
 import com.fakhry.businessapp.core.network.getMessageFromException
@@ -20,6 +23,9 @@ import com.fakhry.businessapp.core.utils.components.showToast
 import com.fakhry.businessapp.core.utils.components.viewBinding
 import com.fakhry.businessapp.core.utils.isShimmerStarted
 import com.fakhry.businessapp.core.utils.isVisible
+import com.fakhry.businessapp.core.utils.location.AssistantLocationListener
+import com.fakhry.businessapp.core.utils.location.AssistantLocationSingleRequest
+import com.fakhry.businessapp.core.utils.location.PermissionUtil
 import com.fakhry.businessapp.databinding.ActivityDashboardBinding
 import com.fakhry.businessapp.domain.business.model.Business
 import com.fakhry.businessapp.presentation.adapters.BusinessPagingAdapter
@@ -31,12 +37,14 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : AppCompatActivity(), PermissionUtil.PermissionCallbacks,
+    AssistantLocationListener {
     private val binding by viewBinding(ActivityDashboardBinding::inflate)
     private val viewModel by viewModels<DashboardViewModel>()
 
     private lateinit var businessAdapter: BusinessPagingAdapter
     private lateinit var filteradapter: FilterAdapter
+    private lateinit var assistantLocationSingleRequest: AssistantLocationSingleRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +53,11 @@ class DashboardActivity : AppCompatActivity() {
         initView()
         initListener()
         initObserver()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        assistantLocationSingleRequest.onDetach()
     }
 
     private fun initView() {
@@ -62,7 +75,8 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         filteradapter.onClick = {
-            viewModel.apply { if (it.isActive) removeFilterBusiness(it) else addFilterBusiness(it) }
+            if (it.id == 0 && it.isActive) getUserLocation()
+            viewModel.apply { if (it.isActive) addFilterBusiness(it) else removeFilterBusiness(it) }
         }
 
         binding.etSearchCatalog.doOnTextChanged { text, _, _, _ ->
@@ -112,4 +126,42 @@ class DashboardActivity : AppCompatActivity() {
         binding.shimmerList.isShimmerStarted(isLoading)
         binding.rvBusiness.isVisible(!isLoading)
     }
+
+    private fun getUserLocation() {
+        assistantLocationSingleRequest = AssistantLocationSingleRequest(this, this)
+        if (PermissionUtil.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            assistantLocationSingleRequest.requestLocation()
+        } else {
+            PermissionUtil.requestPermissions(
+                this, getString(R.string.text_permission_request_title),
+                REQUEST_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+        assistantLocationSingleRequest.requestLocation()
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
+        filteradapter.unCheckedNearbyFilter()
+        PermissionUtil.checkDeniedPermissionsNeverAskAgain(
+            this, getString(R.string.text_permission_message),
+            R.string.text_permission_grant, R.string.text_permission_denny, perms
+        )
+    }
+
+    override fun onSuccessGetLocation(location: Location) {
+        viewModel.setNearbyLocation(location.latitude, location.longitude)
+    }
+
+    override fun onFailedGetLocation(errorMessage: String) {
+        filteradapter.unCheckedNearbyFilter()
+        showToast(errorMessage)
+    }
+
+    companion object {
+        const val REQUEST_LOCATION = 101
+    }
+
 }

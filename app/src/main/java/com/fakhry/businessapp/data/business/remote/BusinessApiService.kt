@@ -26,6 +26,17 @@ interface BusinessApiService {
         @Query("attributes") filters: List<String> = listOf(""),
     ): BusinessesResponse
 
+    @GET("v3/businesses/search")
+    suspend fun getBusinessNearby(
+        @Query("term") term: String = "",
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
+        @Query("radius") radius: Int = 40000,
+        @Query("limit") limit: Int = API_SEARCH_LIMIT,
+        @Query("offset") offset: Int = 0,
+        @Query("attributes") filters: List<String> = listOf(""),
+    ): BusinessesResponse
+
     @GET("v3/businesses/{id}")
     suspend fun getBusinessDetails(
         @Path("id") id: String,

@@ -1,6 +1,5 @@
 package com.fakhry.businessapp.data.business.remote
 
-import android.accounts.NetworkErrorException
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.fakhry.businessapp.core.enums.API_SEARCH_LIMIT
@@ -24,7 +23,22 @@ class BusinessPagingSource(
             if (!networkState.isNetworkAvailable()) throw NetworkException()
 
             val nextOffset = params.key ?: 0
-            val result = apiService.getBusiness(queryParam.asMap(), offset = nextOffset, filters = filters)
+            val result =
+                if (queryParam.latitude == null || queryParam.longitude == null) {
+                    apiService.getBusiness(
+                        queryParam.asMap(),
+                        offset = nextOffset,
+                        filters = filters
+                    )
+                } else {
+                    apiService.getBusinessNearby(
+                        queryParam.terms,
+                        latitude = queryParam.latitude!!,
+                        longitude = queryParam.longitude!!,
+                        offset = nextOffset,
+                        filters = filters
+                    )
+                }
 
             val data = result.businesses
 

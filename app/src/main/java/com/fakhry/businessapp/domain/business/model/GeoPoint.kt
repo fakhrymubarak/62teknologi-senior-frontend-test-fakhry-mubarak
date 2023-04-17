@@ -1,6 +1,6 @@
 package com.fakhry.businessapp.domain.business.model
 
 data class GeoPoint(
-    val latitude: Any,
-    val longitude: Any
+    val latitude: Double,
+    val longitude: Double
 )

@@ -15,6 +15,10 @@
 
     <!-- Dashboard Page-->
     <string name="text_search">Search Business</string>
+    <string name="text_permission_message">If you not grant permission, the apps may not be working properly. So please grant the permission for better user experienced.</string>
+    <string name="text_permission_request_title">Please grant permissions to make apps working properly</string>
+    <string name="text_permission_grant">Grant Permission</string>
+    <string name="text_permission_denny">Deny Permission</string>
 
     <!-- Details Page-->
     <string name="text_open_now">Open Now</string>
