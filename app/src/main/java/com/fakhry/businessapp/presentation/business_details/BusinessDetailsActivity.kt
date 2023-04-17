@@ -1,5 +1,7 @@
 package com.fakhry.businessapp.presentation.business_details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +26,7 @@ import com.fakhry.businessapp.presentation.adapters.PhotoAdapter
 import com.fakhry.businessapp.presentation.adapters.ReviewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
+
 
 @AndroidEntryPoint
 class BusinessDetailsActivity : AppCompatActivity() {
@@ -123,6 +126,15 @@ class BusinessDetailsActivity : AppCompatActivity() {
                     ),
                     null, null, null
                 )
+            }
+
+            btnSeeOnMaps.isVisible(true)
+
+            btnSeeOnMaps.setOnClickListener {
+                val url = "https://maps.google.com/?q=${data.location.latitude},${data.location.longitude}"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(url)
+                startActivity(intent)
             }
         }
     }

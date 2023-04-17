@@ -5,4 +5,5 @@ data class BusinessDetails(
     val photoUrls: List<String>,
     val isOpenNow: Boolean,
     val categories: List<String>,
+    val location: GeoPoint
 )

@@ -134,12 +134,25 @@
             app:layout_constraintTop_toBottomOf="@id/tv_business_contact"
             tools:text="Jalan yang jauh jangan lupa pulang." />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_see_on_maps"
+            style="@style/Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_regular"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:drawableStart="@drawable/ic_location_on_24"
+            android:paddingHorizontal="@dimen/spacing_regular"
+            android:text="@string/text_see_on_maps"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tv_business_address" />
+
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_regular"
             app:layout_constraintBottom_toTopOf="@id/tv_category"
-            app:layout_constraintTop_toBottomOf="@id/tv_business_address" />
+            app:layout_constraintTop_toBottomOf="@id/btn_see_on_maps" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_category"
@@ -151,7 +164,7 @@
             android:text="@string/text_business_categories"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_business_address" />
+            app:layout_constraintTop_toBottomOf="@id/btn_see_on_maps" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_categories"
@@ -194,12 +207,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_tiny"
             android:clipToPadding="false"
-            android:orientation="vertical"
             android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_regular"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_review"
             tools:itemCount="5"
-            android:paddingBottom="@dimen/spacing_regular"
             tools:listitem="@layout/item_review" />
 
         <com.facebook.shimmer.ShimmerFrameLayout

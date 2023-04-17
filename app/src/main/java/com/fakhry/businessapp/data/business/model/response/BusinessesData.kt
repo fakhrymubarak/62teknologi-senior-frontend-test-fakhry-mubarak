@@ -83,5 +83,6 @@ fun BusinessesData.toDomainDetails() = BusinessDetails(
     ),
     isOpenNow = hoursData?.firstOrNull()?.isOpenNow ?: false,
     photoUrls = photos ?: listOf(imageUrl),
-    categories = categories.map { it.title }
+    categories = categories.map { it.title },
+    location = coordinates.toDomain()
 )
