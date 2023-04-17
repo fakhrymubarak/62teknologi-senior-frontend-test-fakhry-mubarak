@@ -32,6 +32,7 @@ private fun ReviewData.toDomain() = Review(
     timeCreatedAgo =  timeCreated.toDateAgo(),
     userName = this.userData.name,
     userAvatarUrl = this.userData.imageUrl ?: "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg",
+    reviewUrl = this.url,
 )
 
 fun List<ReviewData>.toDomain() = this.map { it.toDomain() }

@@ -7,4 +7,5 @@ data class Review(
     val rating: Int,
     val timeCreatedAgo: String,
     val text: String,
+    val reviewUrl: String,
 )

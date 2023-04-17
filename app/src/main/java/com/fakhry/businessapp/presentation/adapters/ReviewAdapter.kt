@@ -10,6 +10,8 @@ import com.fakhry.businessapp.domain.review.model.Review
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
     private val listData = ArrayList<Review>()
 
+    var onDetailClick: ((String) -> Unit)? = null
+
     fun setData(newListData: List<Review>) {
         val previousContentSize = listData.size
         listData.clear()
@@ -39,6 +41,10 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
                 ratingBar.rating = data.rating.toFloat()
                 tvReviewDate.text = data.timeCreatedAgo
                 tvReviewText.text = data.text
+
+                root.setOnClickListener {
+                    onDetailClick?.invoke(data.reviewUrl)
+                }
             }
         }
     }

@@ -70,6 +70,12 @@ class BusinessDetailsActivity : AppCompatActivity() {
                 super.onPageSelected(position)
             }
         })
+
+        reviewAdapter.onDetailClick = { url ->
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
     }
 
     private fun initObserver() {
